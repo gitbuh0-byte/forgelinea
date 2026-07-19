@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Custom colors from user's request */
+  --color-primary-dark: #0D1F33;     /* Deep industrial blue */
+  --color-primary-medium: #13476B;   /* Mid steel blue */
+  --color-secondary-slate: #475569;  /* Slate grey / slate-600 */
+  --color-secondary-light: #F1F5F9;  /* Light grey / slate-100 */
+  --color-secondary-charcoal: #0F172A; /* Charcoal slate-900 */
+  --color-accent-blue: #1D4ED8;      /* Sturdy engineering blue / blue-700 */
+  --color-accent-silver: #64748B;    /* Metallic grey / slate-500 */
+  --color-accent-darksteel: #334155; /* Dark steel / slate-700 */
+
+  /* Extra design tokens to match Mercer's look with blue industrial accents */
+  --color-dark-bg: #FFFFFF;          /* White background */
+  --color-card-bg: #F8FAFC;          /* Clean white / slate-50 card bg */
+  --color-card-border: #E2E8F0;      /* Slate-200 card borders */
+}
+
+@layer base {
+  body {
+    background-color: var(--color-dark-bg);
+    color: #1C1F22;                  /* Requested text color #1C1F22 */
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  /* Headings: default to #0D1F33, but can be overridden */
+  h1, h2 {
+    color: #0D1F33;
+  }
+
+  /* Subheadings: default to #13476B, but can be overridden */
+  h3, h4 {
+    color: #13476B;
+  }
+
+  /* Body Texts: default to #1C1F22, but can be overridden */
+  p, li {
+    color: #1C1F22;
+  }
+}
+
+/* Custom animated breathing background hues */
+@keyframes breathing-hue-1 {
+  0% {
+    transform: translate(-10%, -10%) scale(1) rotate(0deg);
+    opacity: 0.12;
+  }
+  50% {
+    transform: translate(25%, 15%) scale(1.3) rotate(180deg);
+    opacity: 0.26;
+  }
+  100% {
+    transform: translate(-10%, -10%) scale(1) rotate(360deg);
+    opacity: 0.12;
+  }
+}
+
+@keyframes breathing-hue-2 {
+  0% {
+    transform: translate(35%, 55%) scale(1.2) rotate(360deg);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translate(5%, -5%) scale(0.95) rotate(180deg);
+    opacity: 0.22;
+  }
+  100% {
+    transform: translate(35%, 55%) scale(1.2) rotate(0deg);
+    opacity: 0.1;
+  }
+}
+
+.animate-breathing-hue-1 {
+  animation: breathing-hue-1 28s ease-in-out infinite;
+}
+
+.animate-breathing-hue-2 {
+  animation: breathing-hue-2 34s ease-in-out infinite;
+}
+
+/* Custom scrollbar matching industrial slate styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1D4ED8;
+}
+
+/* Steel mesh blueprint grid background, perfect for industrial tech */
+.blueprint-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(29, 78, 216, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29, 78, 216, 0.05) 1px, transparent 1px);
+}
+
+.blueprint-grid-fine {
+  background-size: 10px 10px;
+  background-image: 
+    linear-gradient(to right, rgba(29, 78, 216, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29, 78, 216, 0.025) 1px, transparent 1px);
+}
+
+/* Radial blueprint background to give high-end modern depth */
+.radial-glow {
+  background: radial-gradient(circle 800px at 50% 200px, rgba(29, 78, 216, 0.04), transparent 80%);
+}
+
+.radial-glow-accent {
+  background: radial-gradient(circle 400px at 50% 50%, rgba(29, 78, 216, 0.08), transparent 70%);
+}
+
+/* Infinite text scroll marquee */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 50s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee 50s linear infinite reverse;
+}
+
+/* Glowing laser visual effect */
+@keyframes laser-glow {
+  0%, 100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 2px rgba(29, 78, 216, 0.5)) drop-shadow(0 0 8px rgba(29, 78, 216, 0.3));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 5px rgba(29, 78, 216, 0.9)) drop-shadow(0 0 15px rgba(29, 78, 216, 0.6));
+  }
+}
+
+.laser-active {
+  animation: laser-glow 2s infinite;
+}
+
+/* Subtle border animations */
+.glow-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glow-card-hover:hover {
+  border-color: rgba(29, 78, 216, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(29, 78, 216, 0.12);
+  transform: translateY(-2px);
+}
