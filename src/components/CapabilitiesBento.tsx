@@ -1,149 +1,64 @@
 import React from 'react';
-import { motion } from 'motion/react';
-
-const titleVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: [0.16, 1, 0.3, 1] // Premium cubic-bezier easeOut
-    }
-  }
-};
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.16, 1, 0.3, 1]
-    }
-  }
-};
+import { ShieldCheck, Cpu, Activity, Crosshair } from 'lucide-react';
+import img0 from '../assets/images/img0.jpg';
 
 export default function CapabilitiesBento() {
+  const serviceCards = [
+    {
+      title: 'Structural Steel Engineering',
+      description: 'Columns, beams, trusses, mezzanines and load-bearing steel structures engineered to specification and fabricated to verified tolerances.',
+      icon: ShieldCheck
+    },
+    {
+      title: 'Architectural Metalwork',
+      description: 'Gates, balustrades, staircases, pergolas, screens and façade elements that blend structural integrity with design intent.',
+      icon: Crosshair
+    },
+    {
+      title: 'Laser Cutting & Precision Components',
+      description: 'High-precision CNC laser cutting for mild steel, stainless steel and specialty metals used in signage, brackets and custom assemblies.',
+      icon: Cpu
+    },
+    {
+      title: 'Engineering Delivery',
+      description: 'Project-ready drawings, fabrication workflows and site installation delivered through a controlled, quality-driven process.',
+      icon: Activity
+    }
+  ];
+
   return (
-    <section id="why-us" className="py-24 bg-white relative overflow-hidden">
-      
-      {/* Mesh radiant accent light */}
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent-blue/5 rounded-full blur-3xl pointer-events-none" />
+    <section className="py-24 bg-slate-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="grid items-center gap-8 lg:grid-cols-[567px_minmax(0,1fr)]">
+          <div className="rounded-[32px] overflow-hidden shadow-lg">
+            <img src={img0} alt="ForgeLinea Engineering" className="w-full h-full object-cover" />
+          </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        
-        {/* Section Title matching Mercer design hierarchy */}
-        <motion.div 
-          className="max-w-3xl mb-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={titleVariants}
-        >
-          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-slate-900 tracking-tight mt-2">
-            Why Partner with Forgelinea ?
-          </h2>
-          <p className="font-sans text-slate-600 text-sm sm:text-base mt-4 leading-relaxed max-w-xl">
-            We operate at the convergence of advanced software automation and heavy metallurgy. This enables us to solve structural and aesthetic steel challenges other fabricators turn down.
-          </p>
-        </motion.div>
-
-        {/* 2x2 Evenly Aligned Grid with 3% Border Radius Images */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={containerVariants}
-        >
-          
-          {/* Item 1: 10kW Laser Cutting */}
-          <motion.div className="flex flex-col space-y-4" variants={itemVariants}>
-            <div className="aspect-[16/10] w-full rounded-[3%] overflow-hidden bg-slate-50 border border-slate-100/60 mb-2">
-              <img 
-                src="/src/assets/images/laser_cutting_device_1784332337230.jpg" 
-                alt="Ultra-Precision 10kW Fiber Laser Cutting" 
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-102 rounded-[3%]"
-              />
-            </div>
-            <h3 className="font-display font-bold text-xl text-[#13476B]">
-              Ultra-Precision 10kW Fiber Laser Cutting
-            </h3>
-            <p className="font-sans text-slate-600 text-sm sm:text-base leading-relaxed">
-              We utilize state-of-the-art 10,000-watt fiber optic laser arrays to cut carbon steel and stainless steel. Our high-pressure nitrogen assist gas delivery system guarantees 100% oxide-free, clean cutting edges that require zero secondary dressing or post-processing.
+          <div className="max-w-3xl mx-auto lg:mx-0 lg:text-right">
+            <p className="text-xs uppercase tracking-[0.35em] text-accent-blue font-semibold">About ForgeLinea Engineering</p>
+            <h2 className="mt-4 text-4xl sm:text-5xl font-display font-bold text-slate-950 tracking-tight">
+              Where engineering precision meets industrial craft.
+            </h2>
+            <p className="mt-5 text-base text-slate-600 leading-relaxed max-w-2xl ml-auto">
+              ForgeLinea Engineering Ltd. is a precision fabrication and industrial engineering company headquartered in Nairobi. We design, fabricate, and install structural steelwork, architectural metalwork, and laser-cut components for commercial, industrial, agricultural, automotive, architectural and government clients.
             </p>
-          </motion.div>
+          </div>
+        </div>
 
-          {/* Item 2: BIM & CAD/CAM Software Integration */}
-          <motion.div className="flex flex-col space-y-4" variants={itemVariants}>
-            <div className="aspect-[16/10] w-full rounded-[3%] overflow-hidden bg-slate-50 border border-slate-100/60 mb-2">
-              <img 
-                src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=800" 
-                alt="BIM & CAD/CAM Software Integration" 
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-102 rounded-[3%]"
-              />
-            </div>
-            <h3 className="font-display font-bold text-xl text-[#13476B]">
-              BIM & CAD/CAM Software Integration
-            </h3>
-            <p className="font-sans text-slate-600 text-sm sm:text-base leading-relaxed">
-              We bridge the gap between abstract architectural designs and raw mechanical reality. We ingest files directly from Revit, Tekla, SolidWorks, and AutoCAD, executing automated sheet metal nesting algorithms to maximize material yield and minimize scrap, keeping your project highly cost-efficient.
-            </p>
-          </motion.div>
-
-          {/* Item 3: AWS Structural Welding Compliance */}
-          <motion.div className="flex flex-col space-y-4" variants={itemVariants}>
-            <div className="aspect-[16/10] w-full rounded-[3%] overflow-hidden bg-slate-50 border border-slate-100/60 mb-2">
-              <img 
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800" 
-                alt="AWS Structural Welding Compliance" 
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-102 rounded-[3%]"
-              />
-            </div>
-            <h3 className="font-display font-bold text-xl text-[#13476B]">
-              AWS Structural Welding Compliance
-            </h3>
-            <p className="font-sans text-slate-600 text-sm sm:text-base leading-relaxed">
-              All structural steel welding is performed strictly to AWS D1.1 and D1.5 bridge codes. We provide certified Welding Procedure Specifications (WPS) and 100% NDT (ultrasonic/magnetic particle) records for all heavy welds, guaranteeing complete legal and physical load compliance.
-            </p>
-          </motion.div>
-
-          {/* Item 4: Multi-Axis CNC Rolling & Forming */}
-          <motion.div className="flex flex-col space-y-4" variants={itemVariants}>
-            <div className="aspect-[16/10] w-full rounded-[3%] overflow-hidden bg-slate-50 border border-slate-100/60 mb-2">
-              <img 
-                src="https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&fit=crop&q=80&w=800" 
-                alt="Multi-Axis CNC Rolling & Forming" 
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-102 rounded-[3%]"
-              />
-            </div>
-            <h3 className="font-display font-bold text-xl text-[#13476B]">
-              Multi-Axis CNC Rolling & Forming
-            </h3>
-            <p className="font-sans text-slate-600 text-sm sm:text-base leading-relaxed">
-              Using our heavy-duty 250-ton multi-axis press brakes and automated steel-rolling cylinders, we achieve highly complex spatial shapes and curved profiles. We are experts in fabricating helical stair structures, curved facade arches, and thick steel plate rollings.
-            </p>
-          </motion.div>
-
-        </motion.div>
-
+        <div className="mt-16 grid gap-8 lg:grid-cols-2">
+          {serviceCards.map((service) => {
+            const Icon = service.icon;
+            return (
+              <article key={service.title} className="group rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-lg">
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-3xl bg-accent-blue/10 text-accent-blue">
+                  <Icon className="w-7 h-7" />
+                </div>
+                <h3 className="font-display text-2xl font-bold text-slate-950 mb-4">{service.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{service.description}</p>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

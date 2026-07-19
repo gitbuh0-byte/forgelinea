@@ -50,12 +50,9 @@ export default function WorkshopTour() {
     setLogs((prev) => [
       ...prev,
       '--- INITIATING TRIAL PROFILE CUT ---',
-      `G-Code program generated for ${customThickness}mm thickness...`,
-      `Purging lines with ${selectedPreset.gasAssist}...`,
-      'Laser focus height set. Piercing plate...'
-    ]);
-
-    let progress = 0;
+      `Cut program generated for ${customThickness}mm ${selectedPreset.materialName}...`,
+      `Gas-assist path verified using ${selectedPreset.gasAssist}...`,
+      'Laser focus and pierce sequence engaged.'
     const interval = setInterval(() => {
       progress += 4;
       setCutProgress(progress);
@@ -88,19 +85,19 @@ export default function WorkshopTour() {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
-        {/* Section title & layout similar to Mercer's "A short film on..." section */}
+        {/* Section title and overview of the Forgelinea workshop experience */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <p className="font-mono text-xs text-[#2E8BC0] uppercase tracking-widest font-semibold">PRECISE SIMULATION</p>
           <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[#fff] tracking-tight mt-2">
             Inside the Forgelinea Workshop <br />
             Our Precision Philosophy
           </h2>
-          <p className="font-sans text-secondary-slate text-sm sm:text-base mt-4 leading-relaxed">
-            Experience our advanced CNC fiber optic laser cutting setup. Adjust the material parameters, tune the power, and execute a trial laser-profile cut to see how we maintain pristine, oxide-free edges.
+          <p className="font-sans text-slate-300 text-sm sm:text-base mt-4 leading-relaxed">
+            Explore the Forgelinea process from material selection to precision finish. This simulator reveals how our steel fabrication workflow keeps every component within engineered tolerance.
           </p>
         </div>
 
-        {/* Outer Interactive Dashboard Panel - Cloned from Mercer's Video Card Box frame */}
+        {/* Outer interactive dashboard panel for the CNC laser simulator */}
         {!isPlaying ? (
           // Video preview thumbnail stage, with glowing play overlay
           <div 
@@ -113,7 +110,7 @@ export default function WorkshopTour() {
               src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1200"
               alt="Forgelinea Laser Cutting Head Sparks"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:scale-102 transition-all duration-700 opacity-60"
+              className="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 transition-all duration-700 opacity-60"
             />
 
             {/* Glowing neon mesh grid frame overlay */}
@@ -125,10 +122,10 @@ export default function WorkshopTour() {
                 <Play className="w-8 h-8 fill-current ml-1" />
               </div>
               <span className="font-mono text-xs text-white tracking-widest uppercase font-bold bg-slate-950/85 border border-slate-800 px-4 py-1.5 rounded-full">
-                LAUNCH CNC LASER SIMULATOR
+                LAUNCH CNC WORKSHOP EXPERIENCE
               </span>
-              <p className="font-sans text-xs text-secondary-slate max-w-sm text-center">
-                Interactive real-time controller for steel, carbon steel, and titanium profile runs.
+              <p className="font-sans text-xs text-slate-300 max-w-sm text-center">
+                A guided overview of our 10kW fiber laser platform, material handling and quality controls for precision metal components.
               </p>
             </div>
           </div>
@@ -158,7 +155,7 @@ export default function WorkshopTour() {
               
               {/* Material Profile selector */}
               <div>
-                <label className="font-mono text-[10px] text-secondary-slate uppercase tracking-wider block mb-3 font-semibold">
+                <label className="font-mono text-[10px] text-slate-400 uppercase tracking-wider block mb-3 font-semibold">
                   Select Material Profile
                 </label>
                 <div className="grid grid-cols-1 gap-2">
@@ -174,7 +171,7 @@ export default function WorkshopTour() {
                     >
                       <div className="flex flex-col">
                         <span className="font-display font-bold text-xs">{preset.materialName}</span>
-                        <span className="font-mono text-[9px] text-secondary-slate mt-0.5">Optimal: {preset.optimalThickness} (Max {preset.maxThickness})</span>
+                        <span className="font-mono text-[9px] text-slate-400 mt-0.5">Optimal: {preset.optimalThickness} (Max {preset.maxThickness})</span>
                       </div>
                       {selectedPreset.id === preset.id && <Sparkles className="w-4 h-4 text-accent-blue" />}
                     </button>
@@ -203,7 +200,7 @@ export default function WorkshopTour() {
                     value={laserPower}
                     onChange={(e) => setLaserPower(parseFloat(e.target.value))}
                     disabled={isCutting}
-                    className="w-full accent-accent-blue bg-slate-800 h-1 rounded-lg cursor-pointer"
+                    className="w-full accent-blue bg-slate-800 h-1 rounded-lg cursor-pointer"
                   />
                   <div className="flex justify-between font-mono text-[8px] text-slate-400 mt-1">
                     <span>4 kW</span>
@@ -224,7 +221,7 @@ export default function WorkshopTour() {
                     value={customThickness}
                     onChange={(e) => setCustomThickness(parseInt(e.target.value))}
                     disabled={isCutting}
-                    className="w-full accent-accent-blue bg-slate-800 h-1 rounded-lg cursor-pointer"
+                    className="w-full accent-blue bg-slate-800 h-1 rounded-lg cursor-pointer"
                   />
                   <div className="flex justify-between font-mono text-[8px] text-slate-400 mt-1">
                     <span>1 mm</span>
@@ -239,10 +236,10 @@ export default function WorkshopTour() {
             <div className="lg:col-span-8 flex flex-col space-y-6">
               
               {/* CNC Cutting Chamber (Visual display) */}
-              <div className="h-[280px] bg-[#03060A] border border-card-border rounded-xl relative flex flex-col justify-between overflow-hidden">
+              <div className="h-[280px] bg-[#03060A] border border-slate-800 rounded-xl relative flex flex-col justify-between overflow-hidden">
                 
                 {/* Visual labels overlay */}
-                <div className="p-3 flex items-center justify-between text-secondary-slate z-10">
+                <div className="p-3 flex items-center justify-between text-slate-300 z-10">
                   <div className="flex items-center space-x-1.5">
                     <Activity className="w-3.5 h-3.5 text-red-500 animate-pulse" />
                     <span className="font-mono text-[9px] uppercase tracking-widest font-bold">CNC CHAMBER FEED: ACTIVE</span>
@@ -254,7 +251,7 @@ export default function WorkshopTour() {
                 <div className="relative flex-grow flex items-center justify-center">
                   
                   {/* Metal sheet plate line */}
-                  <div className="w-4/5 h-[3px] bg-secondary-slate rounded absolute top-1/2 left-10 z-0 overflow-hidden">
+                  <div className="w-4/5 h-[3px] bg-slate-700 rounded absolute top-1/2 left-10 z-0 overflow-hidden">
                     {/* Laser cutting gap progress fill */}
                     {isCutting && (
                       <div 

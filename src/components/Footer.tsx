@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowUpRight, Instagram, Linkedin, Facebook } from 'lucide-react';
+import { Instagram, Linkedin, Facebook } from 'lucide-react';
+import logoDark from '../assets/images/logoo1.png';
 
 interface FooterProps {
   onNavClick: (sectionId: string) => void;
@@ -11,6 +12,13 @@ export default function Footer({ onNavClick }: FooterProps) {
   const handleLinkClick = (id: string) => {
     onNavClick(id);
   };
+
+  const footerLinks = [
+    { name: 'Services', id: 'services' },
+    { name: 'Portfolio', id: 'gallery' },
+    { name: 'Standards', id: 'milestones' },
+    { name: 'Contact', id: 'contact' }
+  ];
 
   return (
     <footer className="bg-slate-900 border-t border-slate-800 pt-20 pb-12 relative overflow-hidden">
@@ -28,19 +36,19 @@ export default function Footer({ onNavClick }: FooterProps) {
               onClick={() => handleLinkClick('hero')}
             >
               <img 
-                src="/src/assets/images/forgelinea_flame_logo_1784395749914.jpg" 
+                src={logoDark} 
                 alt="Forgelinea Logo" 
                 referrerPolicy="no-referrer"
                 className="w-16 h-16 object-contain"
               />
               <span className="font-display font-bold text-white text-xl tracking-tight">
-                Forgelinea<span className="text-accent-blue">.</span>
+                forgelinea engineering
               </span>
             </div>
             
             <div className="flex items-center space-x-4 pt-2">
               <a 
-                href="https://instagram.com" 
+                href="https://instagram.com/forgelinea.engineering" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-slate-300 hover:text-white transition-colors p-1"
@@ -76,13 +84,13 @@ export default function Footer({ onNavClick }: FooterProps) {
             <div className="flex flex-col space-y-4">
               <h4 className="font-mono text-[10px] text-white uppercase tracking-widest font-bold">COMPANY NAVIGATION</h4>
               <ul className="flex flex-col space-y-2 text-xs text-slate-300">
-                {['services', 'gallery', 'laser', 'why-us', 'milestones', 'contact'].map((section) => (
-                  <li key={section}>
+                {footerLinks.map((link) => (
+                  <li key={link.id}>
                     <button
-                      onClick={() => handleLinkClick(section)}
-                      className="text-slate-300 hover:text-white transition-colors duration-200 capitalize cursor-pointer text-left font-medium"
+                      onClick={() => handleLinkClick(link.id)}
+                      className="text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer text-left font-medium"
                     >
-                      {section.replace('-', ' ')}
+                      {link.name}
                     </button>
                   </li>
                 ))}
@@ -93,11 +101,11 @@ export default function Footer({ onNavClick }: FooterProps) {
             <div className="flex flex-col space-y-4">
               <h4 className="font-mono text-[10px] text-white uppercase tracking-widest font-bold">CORE SERVICES</h4>
               <ul className="flex flex-col space-y-2 text-xs text-slate-300">
-                <li><button onClick={() => handleLinkClick('why-us')} className="text-slate-300 hover:text-white transition-colors cursor-pointer text-left font-medium">10kW Fiber Laser Cut</button></li>
-                <li><button onClick={() => handleLinkClick('why-us')} className="text-slate-300 hover:text-white transition-colors cursor-pointer text-left font-medium">Structural Steel Frame</button></li>
-                <li><button onClick={() => handleLinkClick('why-us')} className="text-slate-300 hover:text-white transition-colors cursor-pointer text-left font-medium">AWS Certified Weld</button></li>
-                <li><button onClick={() => handleLinkClick('why-us')} className="text-slate-300 hover:text-white transition-colors cursor-pointer text-left font-medium">Double Helical Rolling</button></li>
-                <li><button onClick={() => handleLinkClick('why-us')} className="text-slate-300 hover:text-white transition-colors cursor-pointer text-left font-medium">Stress Analysis FEA</button></li>
+                <li><button onClick={() => handleLinkClick('services')} className="text-slate-300 hover:text-white transition-colors cursor-pointer text-left font-medium">Structural Steel Engineering</button></li>
+                <li><button onClick={() => handleLinkClick('services')} className="text-slate-300 hover:text-white transition-colors cursor-pointer text-left font-medium">Architectural Metalwork</button></li>
+                <li><button onClick={() => handleLinkClick('services')} className="text-slate-300 hover:text-white transition-colors cursor-pointer text-left font-medium">Laser Cutting & Fabrication</button></li>
+                <li><button onClick={() => handleLinkClick('services')} className="text-slate-300 hover:text-white transition-colors cursor-pointer text-left font-medium">Quality Assurance & Testing</button></li>
+                <li><button onClick={() => handleLinkClick('services')} className="text-slate-300 hover:text-white transition-colors cursor-pointer text-left font-medium">Engineering Delivery</button></li>
               </ul>
             </div>
 
@@ -107,15 +115,14 @@ export default function Footer({ onNavClick }: FooterProps) {
         {/* Legal Row and Copyright details */}
         <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-300 font-medium font-sans">
           <div>
-            <p className="text-slate-300">© {currentYear} forglinea engineering. All rights reserved.</p>
+            <p className="text-slate-300">© {currentYear} forgelinea engineering. All rights reserved.</p>
           </div>
           <div className="flex items-center space-x-6 font-medium">
-            <a href="#" className="text-slate-300 hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="text-slate-300 hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="text-slate-300 hover:text-white transition-colors">Engineering Standards</a>
+            <a href="#services" className="text-slate-300 hover:text-white transition-colors">Services</a>
+            <a href="#gallery" className="text-slate-300 hover:text-white transition-colors">Portfolio</a>
+            <a href="#contact" className="text-slate-300 hover:text-white transition-colors">Contact</a>
           </div>
         </div>
-
       </div>
     </footer>
   );

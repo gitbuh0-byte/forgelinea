@@ -9,19 +9,19 @@ export default function Testimonials() {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
-        {/* Section Header mirroring Mercer "Engineering Impact & Client Feedback" */}
+        {/* Section Header for client feedback and partner reviews */}
         <div className="max-w-3xl mb-16">
           <p className="font-mono text-xs text-accent-blue uppercase tracking-widest font-bold">PARTNER REVIEWS</p>
           <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-slate-900 tracking-tight mt-2">
-            Industrial Impact <br />
-            & Client Feedback
+            Trusted across engineering, architecture <br />
+            and industrial delivery.
           </h2>
           <p className="font-sans text-slate-600 text-sm sm:text-base mt-4 leading-relaxed max-w-xl">
-            See how major architectural designers, structural engineers, and heavy industrial procurement managers verify our quality controls and tolerances.
+            Hear from structural engineers, architects, and project leaders who rely on our workflow, accountability, and manufacturing precision.
           </p>
         </div>
 
-        {/* Slidable Carousel/Grid Layout mirroring the card list in Mercer */}
+        {/* Testimonial cards with client feedback and quality ratings */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {testimonialsData.map((test) => (
             <div

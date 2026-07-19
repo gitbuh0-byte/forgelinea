@@ -4,45 +4,70 @@ import { Award, Briefcase, Settings, Landmark, ShieldCheck } from 'lucide-react'
 export default function LegacyTimeline() {
   const milestones = [
     {
-      period: '2025 - Present',
-      title: 'Robotic Welding Automation & 12kW Upgrades',
-      category: 'Advanced Systems',
-      bullets: [
-        'Commissioned dual-arm automated robotic TIG/MIG welding cells to triple architectural part output.',
-        'Installed our premium 12kW Fiber Optic Laser, expanding cutting limits up to 25mm heavy plate.',
-        'Established full digital twin tracing for high-load aeronautic structures.'
-      ]
-    },
-    {
-      period: '2021 - 2024',
-      title: 'ISO 9001 & AWS D1.1/D1.5 Certification',
-      category: 'Quality Standards',
-      bullets: [
-        'Achieved full registration for ISO 9001:2015 Quality Management Standards across all engineering bays.',
-        'Qualified all core shop welders to certified structural AWS standards.',
-        'Constructed custom testing lab for ultrasonic, dye-penetrant, and magnetic particle weld inspections.'
-      ]
-    },
-    {
-      period: '2016 - 2020',
-      title: 'Architectural Curved Steel Specialization',
-      category: 'Market Expansion',
-      bullets: [
-        'Onboarded 250-ton heavy press rollers and expanded into double-helical and architectural steel works.',
-        'Delivered the landmark Helix Museum Facade Project (118 metric tons of custom architectural profiles).',
-        'Built full software pipelines to convert Revit BIM designs directly to cutting nested codes.'
-      ]
-    },
-    {
-      period: '2010 - 2015',
-      title: 'Establishment of Forgelinea Custom Forge',
+      period: '2025',
+      title: 'Forgelinea Engineering Founded',
       category: 'Foundations',
       bullets: [
-        'Founded with a single laser cutter in a 5,000 sq ft warehouse facility.',
-        'Built a stellar reputation for delivering structural steel columns and high-quality local metalworks.',
-        'Pioneered CAD/CAM optimization in the local fabrication space.'
+        'Established in Nairobi as a precision structural steel and architectural metalwork workshop.',
+        'Opened with CNC laser cutting, robotic welding cells, and dedicated fabrication bays.',
+        'Delivered first structural steel, balustrade, gate, and metalwork projects for commercial development clients.'
+      ]
+    },
+    {
+      period: '2025 - 2026',
+      title: 'Commercial, Industrial & Public Projects',
+      category: 'Project Delivery',
+      bullets: [
+        'Built structural platforms, support systems, and factory equipment structures for industrial clients.',
+        'Delivered tender-ready metalwork packages for public infrastructure, institutional buildings, and civic projects.',
+        'Completed agricultural storage structures, fencing systems, and custom automotive fabrication components.'
+      ]
+    },
+    {
+      period: '2026',
+      title: 'Quality, Compliance & Design Collaboration',
+      category: 'Standards',
+      bullets: [
+        'Began formal registration pathways with EBK, IEK, and NCA for engineering and construction compliance.',
+        'Maintained active OSHA-aligned health and safety practices throughout the workshop.',
+        'Collaborated with architects and designers to fabricate bespoke metalwork from concept and detail drawings.'
       ]
     }
+  ];
+
+  const industryFocus = [
+    {
+      label: 'Commercial & Real Estate',
+      description: 'Structural steel, balustrades, gates, and architectural metalwork for developments and commercial buildings.'
+    },
+    {
+      label: 'Industrial',
+      description: 'Structural fabrication, platforms, and equipment support structures for factories and warehouses.'
+    },
+    {
+      label: 'Government & Public Sector',
+      description: 'Tender-ready capability for public infrastructure, institutional buildings, and civic projects.'
+    },
+    {
+      label: 'Agriculture',
+      description: 'Steel-frame storage structures, fencing, and equipment fabrication for agribusiness clients.'
+    },
+    {
+      label: 'Automotive',
+      description: 'Custom fabrication, brackets, and structural components for automotive and workshop applications.'
+    },
+    {
+      label: 'Architecture & Design',
+      description: 'Collaboration with architects and designers to fabricate bespoke metalwork from concept drawings.'
+    }
+  ];
+
+  const certifications = [
+    { title: 'Engineers Board of Kenya (EBK)', status: 'In Progress', target: '2026' },
+    { title: 'Institution of Engineers of Kenya (IEK)', status: 'In Progress', target: '2026' },
+    { title: 'National Construction Authority (NCA)', status: 'In Progress', target: '2026' },
+    { title: 'ISO 9001 Quality Management', status: 'Planned', target: '2027' },
+    { title: 'OSHA-aligned Safety Practice', status: 'Active', target: 'Ongoing' }
   ];
 
   return (
@@ -52,7 +77,7 @@ export default function LegacyTimeline() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-16 mx-auto text-center">
           <p className="font-mono text-xs text-accent-blue uppercase tracking-widest font-bold">CORPORATE EVOLUTION</p>
           <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-slate-900 tracking-tight mt-2">
             Professional Milestones <br />
@@ -60,7 +85,32 @@ export default function LegacyTimeline() {
           </h2>
         </div>
 
-        {/* Minimalistic, container-free 2x2 grid for milestones and categories */}
+        <div className="grid gap-12 lg:grid-cols-[minmax(360px,1fr)_minmax(300px,380px)] mb-14">
+          <div className="grid gap-6 md:grid-cols-2">
+            {industryFocus.map((item) => (
+              <div key={item.label} className="rounded-[28px] border border-slate-200 bg-slate-50 p-6">
+                <h3 className="font-display text-sm font-bold uppercase tracking-[0.35em] text-accent-blue">{item.label}</h3>
+                <p className="mt-3 text-sm text-slate-600 leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+            <h3 className="font-display text-base font-bold text-slate-900 mb-4">Certification & Compliance</h3>
+            <div className="space-y-3">
+              {certifications.map((cert) => (
+                <div key={cert.title} className="flex items-center justify-between gap-4 rounded-2xl bg-slate-50 p-4">
+                  <div>
+                    <p className="font-semibold text-slate-900">{cert.title}</p>
+                    <p className="text-xs text-slate-500">{cert.status}</p>
+                  </div>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">{cert.target}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-16">
           {milestones.map((milestone, idx) => (
             <div key={idx} className="flex flex-col space-y-3.5">

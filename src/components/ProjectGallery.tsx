@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { projectsData } from '../data';
 import { Project } from '../types';
-import { ArrowUpRight, Filter, Info, ShieldCheck, Scale, Ruler, X } from 'lucide-react';
+import { ArrowUpRight, Info, ShieldCheck, Scale, Ruler, X } from 'lucide-react';
 import { motion } from 'motion/react';
 
 const titleVariants = {
@@ -10,8 +10,7 @@ const titleVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.7,
-      ease: [0.16, 1, 0.3, 1] // Premium cubic-bezier easeOut
+      duration: 0.7
     }
   }
 };
@@ -22,8 +21,7 @@ const filterVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
-      ease: "easeOut"
+      duration: 0.6
     }
   }
 };
@@ -45,8 +43,7 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.75,
-      ease: [0.16, 1, 0.3, 1]
+      duration: 0.75
     }
   }
 };
@@ -58,6 +55,7 @@ interface ProjectGalleryProps {
 export default function ProjectGallery({ onSelectProjectForQuote }: ProjectGalleryProps) {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [headerOffset, setHeaderOffset] = useState<number>(0);
 
   useEffect(() => {
     if (selectedProject) {
@@ -69,6 +67,24 @@ export default function ProjectGallery({ onSelectProjectForQuote }: ProjectGalle
       document.body.style.overflow = '';
     };
   }, [selectedProject]);
+
+  useEffect(() => {
+    const computeHeader = () => {
+      const header = document.getElementById('header-nav');
+      const h = header ? header.getBoundingClientRect().height : 0;
+      setHeaderOffset(h + 8); // small gap below header
+    };
+
+    computeHeader();
+    window.addEventListener('resize', computeHeader);
+    window.addEventListener('scroll', computeHeader);
+    window.addEventListener('load', computeHeader);
+    return () => {
+      window.removeEventListener('resize', computeHeader);
+      window.removeEventListener('scroll', computeHeader);
+      window.removeEventListener('load', computeHeader);
+    };
+  }, []);
 
   const categories = [
     { label: 'All Projects', id: 'all' },
@@ -89,7 +105,7 @@ export default function ProjectGallery({ onSelectProjectForQuote }: ProjectGalle
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
-        {/* Section Header mirroring Mercer "Featured Solutions & Projects" layout */}
+        {/* Section Header for the Forgelinea project portfolio */}
         <motion.div 
           className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
           initial="hidden"
@@ -100,8 +116,8 @@ export default function ProjectGallery({ onSelectProjectForQuote }: ProjectGalle
           <div>
             <p className="font-mono text-xs text-accent-blue uppercase tracking-widest font-bold">PORTFOLIO</p>
             <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[#0D1F33] tracking-tight mt-2">
-              Featured Custom Fabrication <br />
-              & Steel Installations
+              Forgelinea project showcase <br />
+              for precision steel systems
             </h2>
           </div>
         </motion.div>
@@ -129,7 +145,7 @@ export default function ProjectGallery({ onSelectProjectForQuote }: ProjectGalle
           ))}
         </motion.div>
 
-        {/* Staggered Grid of Project Cards matching Mercer Portfolio Look */}
+        {/* Staggered project cards for featured fabrication work */}
         <motion.div 
           key={activeCategory} // Seamless entrance transition triggered on filter select too!
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -207,9 +223,13 @@ export default function ProjectGallery({ onSelectProjectForQuote }: ProjectGalle
 
       {/* Dynamic Project Details Modal Overlay */}
       {selectedProject && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-md overflow-y-auto">
-          <div 
-            className="bg-white border border-slate-200 max-w-4xl w-full rounded-[24px] shadow-2xl overflow-hidden relative flex flex-col md:flex-row max-h-[85vh] md:h-[min(85vh,480px)]"
+        <div
+          className="fixed left-0 right-0 z-[9999] flex items-center justify-center bg-slate-900/60 backdrop-blur-md overflow-y-auto"
+          style={{ top: headerOffset + 140, bottom: 20, paddingLeft: 20, paddingRight: 20 }}
+        >
+          <div
+            className="bg-white border border-slate-200 w-full max-w-[1120px] rounded-[24px] shadow-2xl overflow-hidden relative flex flex-col md:flex-row"
+            style={{ maxHeight: `calc(100vh - ${headerOffset + 80}px)` }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}

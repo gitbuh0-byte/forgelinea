@@ -29,7 +29,14 @@ Company: ${company || 'N/A'}
 Message:
 ${message || 'I am interested in discussing a custom fabrication project.'}`;
 
-    return `https://wa.me/254700000000?text=${encodeURIComponent(formattedText)}`;
+    return `https://wa.me/254722210838?text=${encodeURIComponent(formattedText)}`;
+  };
+
+  const getMailtoUrl = () => {
+    const subject = 'Forgelinea Enquiry';
+    const body = `Hello Forgelinea,%0D%0A%0D%0AMy Name: ${name || 'Interested Client'}%0D%0AEmail: ${email || 'N/A'}%0D%0ACompany: ${company || 'N/A'}%0D%0A%0D%0AMessage:%0D%0A${message || 'I am interested in discussing a custom fabrication project.'}`;
+
+    return `mailto:forgelineaeng@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
   };
 
   const handleWhatsAppRedirect = () => {
@@ -39,6 +46,7 @@ ${message || 'I am interested in discussing a custom fabrication project.'}`;
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email || !message) return;
+    window.location.href = getMailtoUrl();
     setSubmitted(true);
   };
 
@@ -59,12 +67,17 @@ ${message || 'I am interested in discussing a custom fabrication project.'}`;
         <div className="max-w-3xl mb-16">
           <p className="font-mono text-xs text-accent-blue uppercase tracking-widest font-bold">CONTACT US</p>
           <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-slate-900 tracking-tight mt-2">
-            Let's build your <br />
-            next masterpiece.
+            Let’s scope your <br />
+            next structural project.
           </h2>
           <p className="font-sans text-slate-600 text-sm sm:text-base mt-4 leading-relaxed max-w-xl">
-            Have a custom steel design or need laser cutting services? Fill out the form below to submit an inquiry or chat directly with our engineering team on WhatsApp.
+            Whether you’re preparing shop drawings or need a full fabrication partnership, our team provides a fast, detailed response with engineering clarity.
           </p>
+          {initialProjectName && (
+            <p className="font-sans text-slate-500 text-sm mt-4 max-w-xl">
+              Ready to discuss: <span className="font-semibold text-slate-900">{initialProjectName}</span>
+            </p>
+          )}
         </div>
 
         {submitted ? (
@@ -107,7 +120,7 @@ ${message || 'I am interested in discussing a custom fabrication project.'}`;
             <div className="lg:col-span-5 flex flex-col space-y-8">
               <div className="flex flex-col space-y-6">
                 <h3 className="font-display font-bold text-xl text-slate-900">
-                  Forgelinea Engineering Ltd.
+                  forgelinea engineering
                 </h3>
                 <p className="font-sans text-slate-600 text-sm leading-relaxed">
                   Our state-of-the-art workshop and custom metal foundry are located in Nairobi, providing sub-millimeter precision services globally.
@@ -120,8 +133,8 @@ ${message || 'I am interested in discussing a custom fabrication project.'}`;
                     </div>
                     <div>
                       <p className="font-mono text-[10px] text-slate-400 uppercase font-bold tracking-wider">CALL US</p>
-                      <p className="font-sans text-sm font-bold text-slate-900 mt-0.5">+254 700 000 000</p>
-                      <p className="font-sans text-xs text-slate-500 mt-0.5">Butere Road Workshop Line</p>
+                      <p className="font-sans text-sm font-bold text-slate-900 mt-0.5">+254 722 210 838</p>
+                      <p className="font-sans text-xs text-slate-500 mt-0.5">Nairobi workshop line</p>
                     </div>
                   </div>
 
@@ -131,7 +144,7 @@ ${message || 'I am interested in discussing a custom fabrication project.'}`;
                     </div>
                     <div>
                       <p className="font-mono text-[10px] text-slate-400 uppercase font-bold tracking-wider">EMAIL US</p>
-                      <p className="font-sans text-sm font-bold text-slate-900 mt-0.5">projects@forgelinea.com</p>
+                      <p className="font-sans text-sm font-bold text-slate-900 mt-0.5">forgelineaeng@gmail.com</p>
                     </div>
                   </div>
 
@@ -209,7 +222,7 @@ ${message || 'I am interested in discussing a custom fabrication project.'}`;
                   type="text"
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  placeholder="Your Company Ltd."
+                  placeholder="Your Company"
                   className="w-full bg-slate-50/50 border border-slate-200 focus:border-accent-blue focus:bg-white rounded-xl px-4 py-3.5 font-sans text-sm text-slate-900 focus:outline-none transition-all"
                 />
               </div>
@@ -235,7 +248,7 @@ ${message || 'I am interested in discussing a custom fabrication project.'}`;
                 {/* Submit Form Button */}
                 <button
                   type="submit"
-                  className="group relative inline-flex items-center justify-center py-4 px-6 rounded-xl overflow-hidden font-display text-xs font-bold uppercase tracking-widest text-white bg-slate-900 hover:bg-slate-850 transition-all duration-300 cursor-pointer shadow-md"
+                  className="group relative inline-flex items-center justify-center py-4 px-6 rounded-xl overflow-hidden font-display text-xs font-bold uppercase tracking-widest text-white bg-slate-900 hover:bg-slate-800 transition-all duration-300 cursor-pointer shadow-md"
                 >
                   <span className="relative flex items-center justify-center space-x-2 z-10 w-full text-center font-semibold">
                     <Send className="w-4 h-4 shrink-0 text-slate-300" />

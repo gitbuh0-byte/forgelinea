@@ -1,41 +1,76 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowUpRight, Download, Activity, Cpu, ShieldAlert, Crosshair } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowUpRight, Download } from 'lucide-react';
+import vid1 from '../assets/vid1.mp4';
+import vid2 from '../assets/vid2.mp4';
+import vid3 from '../assets/vid3.mp4';
+import vid4 from '../assets/vid4.mp4';
+import vid5 from '../assets/vid5.mp4';
 
 interface HeroProps {
   onCtaclick: () => void;
 }
 
+const videoSources = [vid1, vid2, vid3, vid4, vid5];
+
 export default function Hero({ onCtaclick }: HeroProps) {
-  const [selectedWireframe, setSelectedWireframe] = useState<'h-beam' | 'hollow' | 'helical' | 'bracket'>('h-beam');
   const [systemPower, setSystemPower] = useState(10.0);
   const [temp, setTemp] = useState(1450);
-  const [laserArmed, setLaserArmed] = useState(true);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [nextVideoIndex, setNextVideoIndex] = useState(1);
+  const [activePlayer, setActivePlayer] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+  const [activeWordIndex, setActiveWordIndex] = useState(0);
+  const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
+  const rotatingWords = ['Architecture', 'Agriculture', 'Custom Steel Fabrication', 'Industries'];
 
-  // System telemetry simulation to match the "high-tech" feel
   useEffect(() => {
     const interval = setInterval(() => {
-      setSystemPower((prev) => {
-        const delta = (Math.random() - 0.5) * 0.1;
-        return parseFloat(Math.max(9.8, Math.min(10.2, prev + delta)).toFixed(2));
-      });
-      setTemp((prev) => {
-        const delta = Math.round((Math.random() - 0.5) * 8);
-        return Math.max(1430, Math.min(1470, prev + delta));
-      });
-    }, 2000);
+      setSystemPower((prev) => parseFloat(Math.max(9.8, Math.min(10.2, prev + (Math.random() - 0.5) * 0.1)).toFixed(2)));
+      setTemp((prev) => Math.max(1430, Math.min(1470, prev + Math.round((Math.random() - 0.5) * 8))));
+    }, 2200);
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const activeVideo = videoRefs[activePlayer].current;
+    if (!activeVideo) return;
+
+    activeVideo.load();
+    const playPromise = activeVideo.play();
+    if (playPromise?.catch) {
+      playPromise.catch(() => {});
+    }
+  }, [currentVideoIndex, activePlayer]);
+
+  useEffect(() => {
+    if (!isFading) return;
+    const timeout = window.setTimeout(() => {
+      setCurrentVideoIndex(nextVideoIndex);
+      setNextVideoIndex((prev) => (prev + 1) % videoSources.length);
+      setActivePlayer((prev) => 1 - prev);
+      setIsFading(false);
+    }, 500);
+
+    return () => window.clearTimeout(timeout);
+  }, [isFading, nextVideoIndex]);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveWordIndex((prev) => (prev + 1) % rotatingWords.length);
+    }, 4290);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
   const handleDownloadCapabilities = () => {
-    // Standard capability statement mock download
-    const dummyText = `FORGELINEA CUSTOM STEEL & FABRICATION - CAPACITY STATEMENT 2026\n\n` +
-      `- 10kW Fiber Laser Cutting (Tolerances up to ±0.05mm)\n` +
-      `- Heavy Structural Welding (AWS D1.1 & D1.5 Certified)\n` +
-      `- Multi-Axis CNC Bending & Plate Rolling\n` +
-      `- Design, CAD/CAM Integration, & Finite Element Analysis\n` +
-      `- ISO 9001:2015 Registered Facility\n\n` +
-      `Contact: projects@forgelinea.com | Tel: +1 (800) 555-FORGE`;
-    
+    const dummyText = `FORGELINEA ENGINEERING - CAPACITY STATEMENT 2026\n\n` +
+      `- Precision structural steel fabrication and architectural metalwork\n` +
+      `- 10kW fiber laser cutting with ±0.05mm tolerance control\n` +
+      `- AWS-certified heavy structural welding and quality testing\n` +
+      `- CAD/CAM-driven production workflows with FEA-backed design\n` +
+      `- Nairobi-based workshop serving commercial, industrial and government sectors\n\n` +
+      `Contact: forgelineaeng@gmail.com | Tel: +254 722 210 838`;
+
     const blob = new Blob([dummyText], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -47,85 +82,78 @@ export default function Hero({ onCtaclick }: HeroProps) {
   };
 
   return (
-    <section 
-      id="hero" 
-      className="relative min-h-screen pt-28 pb-20 flex items-center justify-center overflow-hidden radial-glow bg-white"
-    >
-      
-      {/* Light blue ambient glow elements */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-accent-blue/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 left-10 w-80 h-80 bg-accent-blue/5 rounded-full blur-3xl pointer-events-none" />
- 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10 w-full">
-        {/* Left Side: Large Typographic Slogan and Action Buttons */}
-        <div className="lg:col-span-7 flex flex-col space-y-8">
-          
-          {/* Large display headline as requested: "We build your dreams to reality." */}
-          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-[#0D1F33] tracking-tight leading-[1.1]">
-            We build your dreams <br />
-            to <span className="text-[#0D1F33]">reality.</span>
+    <section id="hero" className="relative overflow-hidden bg-white">
+      <div className="absolute inset-0 overflow-hidden">
+        {[0, 1].map((player) => {
+          const isActive = activePlayer === player;
+          const videoIndex = isActive ? currentVideoIndex : nextVideoIndex;
+          return (
+            <video
+              key={player}
+              ref={videoRefs[player]}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}
+              muted
+              playsInline
+              autoPlay
+              preload="auto"
+              onEnded={() => setIsFading(true)}
+            >
+              <source src={videoSources[videoIndex]} type="video/mp4" />
+            </video>
+          );
+        })}
+        <div className="absolute inset-0 bg-slate-950/40" />
+      </div>
+
+      <div className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-accent-blue/10 to-transparent pointer-events-none" />
+      <div className="absolute top-[12%] right-0 w-[420px] h-[420px] rounded-full bg-accent-blue/12 blur-3xl pointer-events-none" />
+      <div className="absolute left-0 top-[42%] w-[360px] h-[360px] rounded-full bg-slate-900/5 blur-3xl pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-24 lg:py-32 flex flex-col items-center justify-center">
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-white leading-tight line-clamp-3">
+            Forgelinea Engineering
           </h1>
+          <h2 className="mt-4 text-2xl sm:text-3xl font-display font-bold tracking-tight text-white leading-tight">
+            Where Ideas Become Reality
+            <br />
+            Shaping The Future In ...{' '}
+            <span className="text-white font-bold tracking-tight">
+              {rotatingWords[activeWordIndex]}
+            </span>
+          </h2>
 
-          {/* Slogan details and scope description based on PDF details */}
-          <p className="font-sans text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
-            ForgeLinea Engineering Ltd. is Nairobi's premier partner for precision steel fabrication, heavy load-bearing structural frames, architectural metalwork, and 10kW fiber laser cutting engineered to sub-millimeter tolerances.
-          </p>
-
-          {/* Action buttons with light theme / professional high contrast styling */}
-          <div className="flex flex-wrap gap-4 items-center pt-2">
+          <div className="mt-10 flex flex-wrap justify-center gap-4 items-center">
             <button
               onClick={onCtaclick}
-              className="group relative inline-flex items-center justify-center px-8 py-3.5 rounded-full overflow-hidden font-display text-sm font-bold tracking-wide text-white bg-slate-900 border border-slate-900 transition-all duration-300 cursor-pointer shadow-md hover:shadow-accent-blue/15"
+              className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-7 py-3 text-sm font-semibold tracking-[0.15em] text-white transition hover:bg-accent-blue"
             >
-              <div className="absolute inset-0 w-0 bg-accent-blue transition-all duration-300 ease-out group-hover:w-full" />
-              <span className="relative flex items-center space-x-2 z-10">
-                <span>Initiate Consult</span>
-                <ArrowUpRight className="w-4.5 h-4.5" />
-              </span>
+              Get In Touch
+              <ArrowUpRight className="w-4 h-4" />
             </button>
-
             <button
               onClick={handleDownloadCapabilities}
-              className="group inline-flex items-center space-x-2 px-8 py-3.5 rounded-full border border-slate-200 hover:border-accent-blue bg-slate-50 text-slate-800 font-display text-sm font-bold tracking-wide hover:bg-slate-100 transition-all duration-300 cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-3 text-sm font-semibold tracking-[0.15em] text-slate-950 transition hover:border-accent-blue hover:text-accent-blue"
             >
-              <span>Capabilities Statement</span>
-              <Download className="w-4 h-4 text-accent-blue group-hover:translate-y-0.5 transition-transform" />
+              Capabilities Statement
+              <Download className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Micro structural metrics widget from PDF specifications */}
-          <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-100 max-w-md">
-            <div>
-              <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider font-bold">LASER LIMIT</p>
-              <p className="font-display font-bold text-xl sm:text-2xl text-slate-950 mt-1">±0.5mm</p>
-              <p className="font-sans text-xs text-accent-blue font-medium">Standard tolerance</p>
+          <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-xl mx-auto">
+            <div className="rounded-3xl border border-slate-200 bg-white p-5">
+              <p className="text-[10px] uppercase tracking-[0.35em] text-slate-500">Founded</p>
+              <p className="mt-3 text-xl font-semibold text-slate-950">2025</p>
             </div>
-            <div>
-              <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider font-bold">THICKNESS</p>
-              <p className="font-display font-bold text-xl sm:text-2xl text-slate-950 mt-1">Up to 8mm</p>
-              <p className="font-sans text-xs text-accent-blue font-medium">Steel & Stainless</p>
+            <div className="rounded-3xl border border-slate-200 bg-white p-5">
+              <p className="text-[10px] uppercase tracking-[0.35em] text-slate-500">Headquarters</p>
+              <p className="mt-3 text-xl font-semibold text-slate-950">Nairobi</p>
             </div>
-            <div>
-              <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider font-bold">LOCATION</p>
-              <p className="font-display font-bold text-xl sm:text-2xl text-slate-950 mt-1">Nairobi</p>
-              <p className="font-sans text-xs text-accent-blue font-medium">Butere Rd Workshop</p>
+            <div className="rounded-3xl border border-slate-200 bg-white p-5">
+              <p className="text-[10px] uppercase tracking-[0.35em] text-slate-500">Focus</p>
+              <p className="mt-3 text-xl font-semibold text-slate-950">Precision Engineering</p>
             </div>
           </div>
-
-        </div>
-
-        {/* Right Side: High-End Industrial 3D Rendering & Details from PDF */}
-        <div className="lg:col-span-5 relative flex justify-center items-center w-full">
-          {/* Subtle blue accent glow */}
-          <div className="absolute w-[320px] sm:w-[420px] h-[320px] sm:h-[420px] bg-accent-blue/10 rounded-full blur-3xl pointer-events-none" />
-
-          {/* Clean modern image of the laser steel cutter without any surrounding container */}
-          <img 
-            src="/src/assets/images/laser_cutting_device_1784332337230-removebg-preview.png" 
-            alt="10kW Fiber Optic CNC Laser Steel Cutter" 
-            referrerPolicy="no-referrer"
-            className="w-full max-w-[520px] h-auto object-contain relative z-10 transition-transform duration-500 hover:scale-105"
-          />
         </div>
       </div>
     </section>

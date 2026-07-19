@@ -5,19 +5,20 @@ export const projectsData: Project[] = [
     id: 'proj-01',
     title: 'AeroCrest Cantilever Roof Frame',
     category: 'structural',
-    description: 'High-tolerance structural cantilever framework engineered for a modern airport terminal wing, featuring custom-welded structural tubes.',
+    description: 'High-tolerance structural cantilever roof frame for an airport terminal wing, shown with exposed high-tensile welded nodes and precision-fit steel latticework.',
     details: [
-      'Engineered with high-tensile structural carbon steel to withstand extreme wind shear and cantilever loads.',
-      'Achieved strict tolerances of ±1.0mm over a 24-meter span using robotic fixture alignment.',
-      'Completed full AWS-certified structural welds with 100% ultrasonic non-destructive testing (NDT) passing rate.'
+      'Engineered with high-tensile ASTM A500 Grade B structural carbon steel to withstand extreme wind shear and cantilever loads.',
+      'Image depicts the AeroCrest frame with diagonal bracing, bolted connection plates, and seamless welded gussets along a 24m span.',
+      'Achieved strict tolerances of ±1.0mm over the full span using robotic fixture alignment, then fully inspected with ultrasonic NDT for every weld run.'
     ],
     specs: {
       material: 'ASTM A500 Grade B Structural Carbon Steel',
       tolerance: '± 1.0mm span-wide',
       weight: '42,500 kg',
-      dimensions: '24m x 12m cantilever'
+      dimensions: '24m x 12m cantilever',
+      imageSpecification: 'High-tensile cantilever roof frame with precision-fit lattice, heavy tubular chord members, welded gusset plates, and exposed aerodynamic profile suitable for terminal canopy applications.'
     },
-    image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1200', // Industrial construction / steel frame
+    image: '/src/assets/images/img01.jpg', // Industrial construction / high-tensile cantilever roof frame
     tags: ['Heavy Structural', 'High-Tensile Weld', 'Aeronautical Space'],
     year: '2025'
   },
@@ -35,30 +36,32 @@ export const projectsData: Project[] = [
       material: 'ASTM A36 Plate & Rolled Hollow Profiles',
       tolerance: '± 2.0mm curvature offset',
       weight: '118,000 kg',
-      dimensions: '45m total spiral height'
+      dimensions: '45m total spiral height',
+      imageSpecification: 'Sculptural helical facade panels with spiral steel ribs, smooth weld joints, and an elegant fluid geometry designed for museum architecture.'
     },
-    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1200', // Modern metal building facade
+    image: '/src/assets/images/img02.jpg', // Architectural helical steel facade
     tags: ['Architectural Steel', 'Helical Rolling', 'Seismic Fastening'],
     year: '2026'
   },
   {
     id: 'proj-03',
-    title: 'Ultra-Precision Aviation Turbine Brackets',
-    category: 'laser-cutting',
-    description: 'High-precision aerospace support brackets fabricated with 10kW fiber optic laser cutting followed by automated CNC press brake forming.',
+    title: 'Precision Structural Beam Assemblies',
+    category: 'structural',
+    description: 'Fabricated structural beam assemblies designed for high-capacity industrial and commercial construction, combining welded plate girders with precision machined web stiffeners.',
     details: [
-      'Processed using high-pressure nitrogen assist gas to ensure 100% oxide-free, clean cutting edges.',
-      'Achieved micro-tolerances of ±0.05mm using automated visual nesting and thermal distortion compensation.',
-      'Followed by multi-axis CNC bending and automated deburring for aviation-ready finishes.'
+      'Built from welded plate girders with CNC-profiled web holes for weight optimization and ease of bolted connection assembly.',
+      'Delivered with tight alignment tolerances of ±1.0mm across 8m beam spans, pre-fit for column and truss integration.',
+      'Finished with industrial-grade primer and shop-welding of continuous joints to ensure long-term fatigue performance.'
     ],
     specs: {
-      material: 'AISI 316L Stainless Steel',
-      tolerance: '± 0.05mm critical hole-to-hole',
-      weight: '1.2 kg per unit',
-      dimensions: '340mm x 180mm x 4mm'
+      material: 'ASTM A572 Grade 50 Structural Steel',
+      tolerance: '± 1.0mm span-wide alignment',
+      weight: '3,800 kg per assembly',
+      dimensions: '8m x 1.2m x 0.6m',
+      imageSpecification: 'High-strength structural beams with welded plate girder construction, reinforcing stiffener plates, and precision connection flange details.'
     },
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200', // Laser cutting spark closeup or machinery
-    tags: ['10kW Fiber Laser', 'Aerospace Tolerance', 'Oxide-Free Edge'],
+    image: '/src/assets/images/img03.jpg', // Structural beam assembly
+    tags: ['Structural Beams', 'Plate Girders', 'Industrial Construction'],
     year: '2025'
   },
   {
@@ -82,44 +85,24 @@ export const projectsData: Project[] = [
     year: '2024'
   },
   {
-    id: 'proj-05',
-    title: 'Quantum Tech CNC Enclosures',
-    category: 'laser-cutting',
-    description: 'Custom acoustic and safety steel enclosures for high-speed automated semiconductor testing machines, with micro-ventilation patterns.',
+    id: 'proj-04',
+    title: 'Quarrymaster Heavy Chassis Frame',
+    category: 'heavy-industrial',
+    description: 'Ultra-duty customized steel chassis for a large-scale quarry screening machine, requiring custom heavy bevel prep and multi-pass MIG welding.',
     details: [
-      'High-speed fiber-laser cut with complex micro-ventilation patterns (over 4,000 sub-millimeter perforations).',
-      'Constructed with cold-rolled electro-galvanized steel sheets to provide excellent EMI/RFI shielding.',
-      'Finished with electrostatic industrial powder coating in durable fine texture matte finish.'
+      'Built using extreme wear-resistant Hardox steel plates combined with heavy structural I-beams.',
+      'Multi-pass heavy-duty MIG welding (FCAW) executed by ASME Section IX certified welders.',
+      'Thermally stress-relieved and blast-cleaned to SA 2.5 standards before epoxy primer sealing.'
     ],
     specs: {
-      material: 'Electro-Galvanized Cold Rolled Steel (SECC)',
-      tolerance: '± 0.1mm sheet-to-sheet',
-      weight: '145 kg per enclosure',
-      dimensions: '1800mm x 1200mm x 900mm'
+      material: 'Hardox 450 Wear Plates & ASTM A572 I-Beams',
+      tolerance: '± 1.5mm diagonal alignment',
+      weight: '18,600 kg',
+      dimensions: '9.2m x 3.1m x 1.8m'
     },
-    image: 'https://images.unsplash.com/photo-1563784462386-044fd95e9852?auto=format&fit=crop&q=80&w=1200', // Metal server racks or CNC boxes
-    tags: ['Perforated Patterns', 'EMI Shielding', 'Powder Coating'],
-    year: '2025'
-  },
-  {
-    id: 'proj-06',
-    title: 'Solaris Suspended Pedestrian Archway',
-    category: 'structural',
-    description: 'Suspended architectural double-arch steel bridge linking two high-security green energy research campuses across a central ravine.',
-    details: [
-      'Tubular steel tension arch design engineered to distribute asymmetric pedestrian loads.',
-      'High-performance duplex stainless steel detailing on cable attachment lugs for high salt spray resistance.',
-      'Erected in pre-assembled sections to minimize environmental impact on the protected ravine.'
-    ],
-    specs: {
-      material: 'S355J2H Structural Hollow Profiles & Duplex 2205 Details',
-      tolerance: '± 3.0mm cable-stay tensioners',
-      weight: '67,000 kg',
-      dimensions: '38m span length'
-    },
-    image: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=1200', // Modern architectural steel bridge
-    tags: ['Bridges & Arches', 'Duplex Stainless', 'Assembled Modular'],
-    year: '2026'
+    image: 'https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&q=80&w=1200', // Factory production heavy machinery
+    tags: ['Heavy Industrial', 'MIG Multi-Pass', 'Wear-Resistant Steel'],
+    year: '2024'
   }
 ];
 

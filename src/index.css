@@ -4,7 +4,7 @@
 @theme {
   --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Montserrat", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-mono: "Montserrat", ui-sans-serif, system-ui, sans-serif;
 
   /* Custom colors from user's request */
   --color-primary-dark: #0D1F33;     /* Deep industrial blue */
@@ -30,6 +30,11 @@
     overflow-x: hidden;
   }
 
+  /* Force Montserrat globally */
+  html, body, input, textarea, button, select {
+    font-family: var(--font-sans) !important;
+  }
+
   /* Headings: default to #0D1F33, but can be overridden */
   h1, h2 {
     color: #0D1F33;
@@ -44,6 +49,19 @@
   p, li {
     color: #1C1F22;
   }
+}
+
+/* Scroll reveal progressive fade + move */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Custom animated breathing background hues */
@@ -156,6 +174,13 @@
 
 .laser-active {
   animation: laser-glow 2s infinite;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
 /* Subtle border animations */

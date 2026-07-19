@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import logoLight from '../assets/images/logoo.png';
+import logoDark from '../assets/images/logoo1.png';
 
 interface HeaderProps {
   onNavClick: (sectionId: string) => void;
@@ -20,10 +22,8 @@ export default function Header({ onNavClick, activeSection }: HeaderProps) {
 
   const navLinks = [
     { name: 'Services', id: 'services' },
-    { name: 'Gallery', id: 'gallery' },
-    { name: 'Precision Laser', id: 'laser' },
-    { name: 'Why Us', id: 'why-us' },
-    { name: 'Milestones', id: 'milestones' },
+    { name: 'Portfolio', id: 'gallery' },
+    { name: 'Standards', id: 'milestones' },
     { name: 'Contact', id: 'contact' }
   ];
 
@@ -48,31 +48,30 @@ export default function Header({ onNavClick, activeSection }: HeaderProps) {
           onClick={() => handleLinkClick('hero')}
         >
           <img 
-            src="/src/assets/images/forgelinea_flame_logo_1784395749914.jpg" 
+            src={scrolled ? logoLight : logoDark} 
             alt="Forgelinea Logo" 
             referrerPolicy="no-referrer"
             className="w-16 h-16 object-contain"
           />
           <div>
-            <span className="font-display font-bold text-slate-900 text-xl tracking-tight">
-              Forgelinea<span className="text-accent-blue">.</span>
-            </span>
-            <span className="hidden sm:block font-mono text-[10px] tracking-widest text-slate-500 uppercase leading-none mt-0.5 font-semibold">
-              ENGINEERING LTD
+            <span className={`font-display font-bold text-xl tracking-tight ${scrolled ? 'text-slate-900' : 'text-white'}`}>
+              forgelinea engineering
             </span>
           </div>
         </div>
 
-        {/* Center - Navigation Links - Matches the Mercer style */}
+        {/* Center - Navigation Links */}
         <nav className="hidden lg:flex items-center space-x-8">
           {navLinks.map((link) => (
             <button
               key={link.id}
               onClick={() => handleLinkClick(link.id)}
-              className={`font-sans text-sm tracking-wide transition-colors duration-200 relative py-1 cursor-pointer hover:text-slate-900 ${
+              className={`font-sans text-sm tracking-wide transition-colors duration-200 relative py-1 cursor-pointer ${
                 activeSection === link.id 
                   ? 'text-accent-blue font-semibold' 
-                  : 'text-slate-600'
+                  : scrolled 
+                    ? 'text-slate-600 hover:text-slate-900' 
+                    : 'text-white hover:text-slate-200'
               }`}
             >
               {link.name}
@@ -83,7 +82,7 @@ export default function Header({ onNavClick, activeSection }: HeaderProps) {
           ))}
         </nav>
 
-        {/* Right - Contact CTA Button - Matches the "Let's Talk" button in Mercer design */}
+        {/* Right - Contact CTA Button */}
         <div className="hidden lg:block">
           <button
             onClick={() => handleLinkClick('contact')}
@@ -100,7 +99,7 @@ export default function Header({ onNavClick, activeSection }: HeaderProps) {
         {/* Mobile menu trigger */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden p-2 text-slate-600 hover:text-slate-900 focus:outline-none transition-colors cursor-pointer"
+          className={`lg:hidden p-2 focus:outline-none transition-colors cursor-pointer ${scrolled ? 'text-slate-600 hover:text-slate-900' : 'text-white hover:text-slate-200'}`}
           aria-label="Toggle Menu"
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
