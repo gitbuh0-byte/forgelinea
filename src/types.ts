@@ -9,6 +9,7 @@ export interface Project {
     tolerance: string;
     weight?: string;
     dimensions?: string;
+    imageSpecification?: string;
   };
   image: string;
   tags: string[];
