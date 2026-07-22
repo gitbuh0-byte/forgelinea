@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowUpRight, Download } from 'lucide-react';
-import posterImg from '../assets/images/img0.jpg';
 
 interface HeroProps {
   onCtaclick: () => void;
@@ -18,8 +17,6 @@ export default function Hero({ onCtaclick }: HeroProps) {
   const [activeWordIndex, setActiveWordIndex] = useState(0);
   const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
   const rotatingWords = ['Architecture', 'Agriculture', 'Custom Steel Fabrication', 'Industries'];
-  const [videoFailed, setVideoFailed] = useState(false);
-  const [videoAvailable, setVideoAvailable] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -38,7 +35,6 @@ export default function Hero({ onCtaclick }: HeroProps) {
     if (playPromise?.catch) {
       playPromise.catch((err) => {
         console.warn('Hero video play() rejected:', err);
-        setVideoFailed(true);
       });
     }
   }, [currentVideoIndex, activePlayer]);
@@ -53,17 +49,9 @@ export default function Hero({ onCtaclick }: HeroProps) {
         if (cancelled) return;
         if (!res.ok) {
           console.warn('Hero video HEAD check failed:', res.status);
-          setVideoAvailable(false);
-          setVideoFailed(true);
-        } else {
-          setVideoAvailable(true);
         }
       } catch (e) {
         console.warn('Hero video availability check error:', e);
-        if (!cancelled) {
-          setVideoAvailable(false);
-          setVideoFailed(true);
-        }
       }
     }
     checkAvailability();
@@ -125,8 +113,6 @@ export default function Hero({ onCtaclick }: HeroProps) {
               autoPlay
               preload="auto"
               onEnded={() => setIsFading(true)}
-              onError={() => setVideoFailed(true)}
-              poster={posterImg}
               src={videoSources[videoIndex]}
               crossOrigin="anonymous"
               onCanPlay={() => console.log('Hero video canplay:', videoSources[videoIndex])}
@@ -136,11 +122,6 @@ export default function Hero({ onCtaclick }: HeroProps) {
             </video>
           );
         })}
-        {videoFailed && (
-          <div className="absolute inset-0">
-            <img src={posterImg} alt="Forgelinea workshop" className="w-full h-full object-cover" />
-          </div>
-        )}
         <div className="absolute inset-0 bg-slate-950/40" />
       </div>
 
