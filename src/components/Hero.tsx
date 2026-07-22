@@ -1,17 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowUpRight, Download } from 'lucide-react';
-import vid1 from '../assets/vid1.mp4';
-import vid2 from '../assets/vid2.mp4';
-import vid3 from '../assets/vid3.mp4';
-import vid4 from '../assets/vid4.mp4';
-import vid5 from '../assets/vid5.mp4';
 import posterImg from '../assets/images/img0.jpg';
 
 interface HeroProps {
   onCtaclick: () => void;
 }
 
-const videoSources = [vid1, vid2, vid3, vid4, vid5];
+const videoSources = ['/videos/vid1.mp4', '/videos/vid2.mp4', '/videos/vid3.mp4', '/videos/vid4.mp4', '/videos/vid5.mp4'];
 
 export default function Hero({ onCtaclick }: HeroProps) {
   const [systemPower, setSystemPower] = useState(10.0);
@@ -24,6 +19,7 @@ export default function Hero({ onCtaclick }: HeroProps) {
   const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
   const rotatingWords = ['Architecture', 'Agriculture', 'Custom Steel Fabrication', 'Industries'];
   const [videoFailed, setVideoFailed] = useState(false);
+  const [videoAvailable, setVideoAvailable] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,9 +36,39 @@ export default function Hero({ onCtaclick }: HeroProps) {
     activeVideo.load();
     const playPromise = activeVideo.play();
     if (playPromise?.catch) {
-      playPromise.catch(() => {});
+      playPromise.catch((err) => {
+        console.warn('Hero video play() rejected:', err);
+        setVideoFailed(true);
+      });
     }
   }, [currentVideoIndex, activePlayer]);
+
+  // Runtime availability check for video assets (helps detect 404s on deployed site)
+  useEffect(() => {
+    let cancelled = false;
+    async function checkAvailability() {
+      try {
+        const url = videoSources[0];
+        const res = await fetch(url, { method: 'HEAD' });
+        if (cancelled) return;
+        if (!res.ok) {
+          console.warn('Hero video HEAD check failed:', res.status);
+          setVideoAvailable(false);
+          setVideoFailed(true);
+        } else {
+          setVideoAvailable(true);
+        }
+      } catch (e) {
+        console.warn('Hero video availability check error:', e);
+        if (!cancelled) {
+          setVideoAvailable(false);
+          setVideoFailed(true);
+        }
+      }
+    }
+    checkAvailability();
+    return () => { cancelled = true; };
+  }, []);
 
   useEffect(() => {
     if (!isFading) return;
