@@ -6,7 +6,7 @@ interface HeroProps {
   onCtaclick: () => void;
 }
 
-const videoSources = ['/videos/vid1.mp4', '/videos/vid2.mp4', '/videos/vid3.mp4', '/videos/vid4.mp4', '/videos/vid5.mp4'];
+const videoSources = ['/videos/vid1.mp4', '/videos/vid2.mp4', '/videos/vid3.mp4', '/videos/vid4.mp4'];
 
 export default function Hero({ onCtaclick }: HeroProps) {
   const [systemPower, setSystemPower] = useState(10.0);
