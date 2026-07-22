@@ -127,6 +127,10 @@ export default function Hero({ onCtaclick }: HeroProps) {
               onEnded={() => setIsFading(true)}
               onError={() => setVideoFailed(true)}
               poster={posterImg}
+              src={videoSources[videoIndex]}
+              crossOrigin="anonymous"
+              onCanPlay={() => console.log('Hero video canplay:', videoSources[videoIndex])}
+              onLoadedMetadata={() => console.log('Hero video loaded metadata:', videoSources[videoIndex])}
             >
               <source src={videoSources[videoIndex]} type="video/mp4" />
             </video>
