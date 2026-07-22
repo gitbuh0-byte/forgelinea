@@ -53,6 +53,9 @@ export default function WorkshopTour() {
       `Cut program generated for ${customThickness}mm ${selectedPreset.materialName}...`,
       `Gas-assist path verified using ${selectedPreset.gasAssist}...`,
       'Laser focus and pierce sequence engaged.'
+    ]);
+
+    let progress = 0;
     const interval = setInterval(() => {
       progress += 4;
       setCutProgress(progress);

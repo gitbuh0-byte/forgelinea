@@ -5,6 +5,7 @@ import vid2 from '../assets/vid2.mp4';
 import vid3 from '../assets/vid3.mp4';
 import vid4 from '../assets/vid4.mp4';
 import vid5 from '../assets/vid5.mp4';
+import posterImg from '../assets/images/img0.jpg';
 
 interface HeroProps {
   onCtaclick: () => void;
@@ -22,6 +23,7 @@ export default function Hero({ onCtaclick }: HeroProps) {
   const [activeWordIndex, setActiveWordIndex] = useState(0);
   const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
   const rotatingWords = ['Architecture', 'Agriculture', 'Custom Steel Fabrication', 'Industries'];
+  const [videoFailed, setVideoFailed] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -97,11 +99,18 @@ export default function Hero({ onCtaclick }: HeroProps) {
               autoPlay
               preload="auto"
               onEnded={() => setIsFading(true)}
+              onError={() => setVideoFailed(true)}
+              poster={posterImg}
             >
               <source src={videoSources[videoIndex]} type="video/mp4" />
             </video>
           );
         })}
+        {videoFailed && (
+          <div className="absolute inset-0">
+            <img src={posterImg} alt="Forgelinea workshop" className="w-full h-full object-cover" />
+          </div>
+        )}
         <div className="absolute inset-0 bg-slate-950/40" />
       </div>
 

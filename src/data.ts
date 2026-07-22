@@ -1,4 +1,8 @@
 import { Project, Testimonial } from './types';
+import img01 from './assets/images/img01.jpg';
+import img02 from './assets/images/img02.jpg';
+import img03 from './assets/images/img03.jpg';
+import img0 from './assets/images/img0.jpg';
 
 export const projectsData: Project[] = [
   {
@@ -18,7 +22,7 @@ export const projectsData: Project[] = [
       dimensions: '24m x 12m cantilever',
       imageSpecification: 'High-tensile cantilever roof frame with precision-fit lattice, heavy tubular chord members, welded gusset plates, and exposed aerodynamic profile suitable for terminal canopy applications.'
     },
-    image: '/src/assets/images/img01.jpg', // Industrial construction / high-tensile cantilever roof frame
+    image: img01, // Industrial construction / high-tensile cantilever roof frame
     tags: ['Heavy Structural', 'High-Tensile Weld', 'Aeronautical Space'],
     year: '2025'
   },
@@ -39,7 +43,7 @@ export const projectsData: Project[] = [
       dimensions: '45m total spiral height',
       imageSpecification: 'Sculptural helical facade panels with spiral steel ribs, smooth weld joints, and an elegant fluid geometry designed for museum architecture.'
     },
-    image: '/src/assets/images/img02.jpg', // Architectural helical steel facade
+    image: img02, // Architectural helical steel facade
     tags: ['Architectural Steel', 'Helical Rolling', 'Seismic Fastening'],
     year: '2026'
   },
@@ -60,7 +64,7 @@ export const projectsData: Project[] = [
       dimensions: '8m x 1.2m x 0.6m',
       imageSpecification: 'High-strength structural beams with welded plate girder construction, reinforcing stiffener plates, and precision connection flange details.'
     },
-    image: '/src/assets/images/img03.jpg', // Structural beam assembly
+    image: img03, // Structural beam assembly
     tags: ['Structural Beams', 'Plate Girders', 'Industrial Construction'],
     year: '2025'
   },
