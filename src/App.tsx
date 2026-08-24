@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
-import img0 from './assets/images/img0.jpg';
-import img01 from './assets/images/img01.jpg';
-import img02 from './assets/images/img02.jpg';
-import img03 from './assets/images/img03.jpg';
 import logoLight from './assets/images/logoo.png';
 import logoDark from './assets/images/logoo1.png';
+
+const img0 = '/images/img0.webp';
+const img01 = '/images/img01.webp';
+const img02 = '/images/img02.webp';
+const img03 = '/images/img03.webp';
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,6 +20,7 @@ export default function App() {
 
   return (
     <div className="site-shell">
+      <link rel="preload" as="image" href={img01} fetchPriority="high" />
       <header className="site-header" id="header-nav">
         <button className="brand" onClick={() => go('hero')}><img src={logoLight} alt="Forgelinea" /><span>FORGELINEA<br /><small>ENGINEERING</small></span></button>
         <nav className={menuOpen ? 'nav-links is-open' : 'nav-links'}>
@@ -33,11 +35,11 @@ export default function App() {
 
         <section className="partner-strip"><p className="eyebrow">TRUSTED BY INDUSTRY LEADERS</p><h2>Partnering with the operators<br />powering global energy</h2></section>
 
-        <section id="about" className="about-section page-width"><img src={img0} alt="Industrial offshore engineering" /><div><p className="eyebrow">01 · ABOUT FORGELINEA ENGINEERING</p><h2>Where engineering precision meets industrial craft.</h2><p><strong>Forgelinea Engineering Ltd.</strong> is a precision fabrication and industrial engineering company headquartered in Nairobi, Kenya. We design, fabricate, and install structural steelwork, architectural metalwork, and laser-cut components for commercial, industrial, agricultural, automotive, architectural, and government clients.</p><p>ForgeLinea brings the craft of shaping metal together with the geometry and discipline of modern engineering. Every project passes through precise specification, careful material selection, controlled fabrication, and verified quality before delivery.</p><button className="text-link" onClick={() => go('promise')}>Read our company promise <ArrowUpRight size={15} /></button></div></section>
+        <section id="about" className="about-section page-width"><img src={img0} alt="Industrial offshore engineering" loading="lazy" decoding="async" /><div><p className="eyebrow">01 · ABOUT FORGELINEA ENGINEERING</p><h2>Where engineering precision meets industrial craft.</h2><p><strong>Forgelinea Engineering Ltd.</strong> is a precision fabrication and industrial engineering company headquartered in Nairobi, Kenya. We design, fabricate, and install structural steelwork, architectural metalwork, and laser-cut components for commercial, industrial, agricultural, automotive, architectural, and government clients.</p><p>ForgeLinea brings the craft of shaping metal together with the geometry and discipline of modern engineering. Every project passes through precise specification, careful material selection, controlled fabrication, and verified quality before delivery.</p><button className="text-link" onClick={() => go('promise')}>Read our company promise <ArrowUpRight size={15} /></button></div></section>
 
         <section className="glance-section"><div className="page-width"><div><p className="eyebrow">02 · COMPANY AT A GLANCE</p><h2>Built for accurate work<br />and accountable delivery.</h2></div><div className="glance-grid"><div><b>Headquarters</b><span>Tui Agricultural Engineers, Building 21, Industrial Area, Butere Road, Nairobi</span></div><div><b>Markets</b><span>Nairobi and East Africa, with regional growth underway</span></div><div><b>Technology</b><span>CNC laser cutting, MIG/TIG welding, forming and finishing</span></div><div><b>Delivery coverage</b><span>Site installation across Kenya with regional mobilisation</span></div></div></div></section>
 
-        <section id="projects" className="projects-section page-width"><div className="section-heading"><div><p className="eyebrow">OUR PROJECTS</p><h2>Delivering at the scale<br />of global infrastructure.</h2></div><button className="text-link">All projects <ArrowUpRight size={15} /></button></div><div className="project-grid">{projects.map((project) => <article key={project.title}><img src={project.image} alt={project.title} /><div><p>{project.label}</p><h3>{project.title}</h3><ArrowUpRight size={18} /></div></article>)}</div></section>
+        <section id="projects" className="projects-section page-width"><div className="section-heading"><div><p className="eyebrow">OUR PROJECTS</p><h2>Delivering at the scale<br />of global infrastructure.</h2></div><button className="text-link">All projects <ArrowUpRight size={15} /></button></div><div className="project-grid">{projects.map((project) => <article key={project.title}><img src={project.image} alt={project.title} loading="lazy" decoding="async" /><div><p>{project.label}</p><h3>{project.title}</h3><ArrowUpRight size={18} /></div></article>)}</div></section>
 
         <section id="services" className="services-section"><div className="page-width"><p className="eyebrow">05 · WHAT WE DO</p><h2>Engineering solutions across<br />six core disciplines.</h2><div className="service-list"><article><b>01</b><h3>Structural steel</h3><p>Columns, beams, trusses, mezzanines, platforms, roof structures and verified-tolerance reinforcement.</p></article><article><b>02</b><h3>Architectural metalwork</h3><p>Gates, balustrades, staircases, pergolas, canopies, decorative screens and custom interiors.</p></article><article><b>03</b><h3>Specialized welding</h3><p>Expert MIG, TIG and arc welding for aluminum, stainless steel, copper, brass, alloys and repairs.</p></article><article><b>04</b><h3>Laser cutting</h3><p>High-precision CNC cutting for mild steel, stainless, specialty components, signage and prototypes.</p></article><article><b>05</b><h3>Automotive engineering</h3><p>Custom grills, bull bars, chassis modifications, brackets, utility bodies and exhaust systems.</p></article><article><b>06</b><h3>Electrical fabrication</h3><p>Trunks, conduits, junction boxes, cable management, equipment frames and power systems.</p></article></div></div></section>
 
